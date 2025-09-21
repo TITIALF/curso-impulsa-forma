@@ -20,8 +20,12 @@
 }
 .js .exe-accordion h2{padding:0;border:0;display:block;background:none;border-radius:3px}
 .js .fx-accordion-title{text-decoration:none}
-.fx-accordion-title.active,.fx-accordion-title:hover{/*background:#4c4c4c;*/filter:alpha(opacity=90);opacity:.9;text-decoration:none}
-.fx-accordion-section:last-child .fx-accordion-title{border-bottom:none}
+.fx-accordion-title.active, .fx-accordion-title:hover {
+    background: #ccc;
+    filter: alpha(opacity=90);
+    opacity: .9;
+    text-decoration: none;
+}.fx-accordion-section:last-child .fx-accordion-title{border-bottom:none}
 .fx-accordion-content{padding:0 15px;display:none}
 /* Tabs */
 .exe-tabs{margin:2em auto;width:90%}
