@@ -149,3 +149,29 @@ color:#FFF;
 .emphasis1 .fx-pagination a{
 background:#FFF;
 }
+/* Solución completa para el Acordeón: una sola flecha, giratoria y bien posicionada */
+.fx-accordion-title, .exe-accordion h2 {
+    /* Esto acerca la flecha al título y le da espacio para que no lo tape */
+    padding-right: 25px !important;
+    font-weight: bold !important;
+    position: relative !important;
+}
+.fx-accordion-title:before, .exe-accordion h2:before {
+    /* Oculta la flecha extra que no rota */
+    content: none !important;
+}
+.fx-accordion-title:after, .exe-accordion h2:after {
+    /* Esta es la flecha que queremos ver */
+    content: "▼" !important;
+    position: absolute !important;
+    /* La posiciona más cerca del borde para que se vea bien */
+    right: 5px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: #333 !important;
+    transition: transform 0.3s ease !important;
+}
+.fx-accordion-title.active:after, .exe-accordion h2.active:after {
+    /* Este código hace que la flecha gire al abrir el desplegable */
+    transform: translateY(-50%) rotate(180deg) !important;
+}
