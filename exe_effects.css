@@ -27,19 +27,7 @@
 }
 .fx-accordion-section:last-child .fx-accordion-title{border-bottom:none}
 .fx-accordion-content{padding:0 15px;display:none}
-.toggle-idevice:after {
-    content: "▼";
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #333;
-    transition: transform 0.3s ease;
-}
 
-.toggle-idevice.show-idevice:after {
-    transform: translateY(-50%) rotate(180deg);
-}
 
 .fx-accordion-title.active:after, .exe-accordion h2.active:after {
     transform: translateY(-50%) rotate(180deg);
