@@ -149,12 +149,4 @@ color:#FFF;
 .emphasis1 .fx-pagination a{
 background:#FFF;
 }
-/* Correcciones para forzar la visibilidad y el giro de la flecha */
-.fx-accordion-title:after, .exe-accordion h2:after {
-    content: "▼" !important;
-    color: #333 !important;
-}
 
-.fx-accordion-title.active:after, .exe-accordion h2.active:after {
-    transform: translateY(-50%) rotate(180deg) !important;
-}
