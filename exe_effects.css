@@ -149,13 +149,3 @@ color:#FFF;
 .emphasis1 .fx-pagination a{
 background:#FFF;
 }
-/* Corrección para acercar la flecha al título */
-.fx-accordion-title, .exe-accordion h2 {
-    /* Esto crea el espacio para la flecha y la acerca al texto */
-    padding-right: 25px !important;
-}
-
-.fx-accordion-title:after, .exe-accordion h2:after {
-    /* Esto mueve la flecha más cerca del título */
-    right: 5px !important;
-}
