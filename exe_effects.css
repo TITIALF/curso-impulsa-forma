@@ -149,24 +149,4 @@ color:#FFF;
 .emphasis1 .fx-pagination a{
 background:#FFF;
 }
-/* Solución Final y definitiva: una sola flecha, cercana y giratoria */
-.js .fx-accordion-title, .js .exe-accordion h2 {
-    padding-right: 25px !important;
-}
 
-.js .fx-accordion-title::before, .js .exe-accordion h2::before {
-    content: none !important;
-}
-
-.js .fx-accordion-title::after, .js .exe-accordion h2::after {
-    content: "▼" !important;
-    right: 5px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    color: #333 !important;
-    transition: transform 0.3s ease !important;
-}
-
-.js .fx-accordion-title.active::after, .js .exe-accordion h2.active::after {
-    transform: translateY(-50%) rotate(180deg) !important;
-}
