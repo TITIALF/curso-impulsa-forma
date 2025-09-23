@@ -159,7 +159,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   headers.forEach(header => {
     header.addEventListener("click", function() {
-      // Alterna la clase active
+      // Cierra los demás si quieres que solo uno esté activo
+      headers.forEach(h => {
+        if (h !== this) h.classList.remove("active");
+      });
+
+      // Alterna solo este
       this.classList.toggle("active");
     });
   });
