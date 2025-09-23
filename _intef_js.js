@@ -153,3 +153,14 @@ $(function(){
 	}
 	myTheme.common.init();
 });
+// --- BLOQUE PARA ACTIVAR FLECHA EN ACORDEÓN ---
+document.addEventListener("DOMContentLoaded", function() {
+  const headers = document.querySelectorAll(".exe-accordion h2");
+
+  headers.forEach(header => {
+    header.addEventListener("click", function() {
+      // Alterna la clase active
+      this.classList.toggle("active");
+    });
+  });
+});
