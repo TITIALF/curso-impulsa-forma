@@ -127,35 +127,7 @@ $exeFX = {
 				}
 			}			
 			// onclick
-			t.click(function(e) {
-				var aID = this.id.split("-")[0];
-				aID = aID.replace("_","-").replace("_","-");
-				var currentAttrValue = $(this).attr('href');
-				
-				// IE7 retrieves link#hash instead of #hash
-				currentAttrValue = currentAttrValue.split("#");
-				currentAttrValue = "#"+currentAttrValue[1];
-				// / IE7
-				
-				var target = $(e.target);
-				var targetName;
-
-				if ($exeFX.isOldBrowser) targetName = target[0].nodeName;
-				else targetName = target[0].localName;
-				
-				if (targetName==$exeFX.h2) target = target.parent();
-				
-				if(target.is('.active')) {
-					$exeFX.accordion.closeBlock(aID);
-				} else {
-					$exeFX.accordion.closeBlock(aID);
-					$(this).addClass('active');
-					$('.'+k+'-accordion ' + currentAttrValue).slideDown(300,function(){
-						$exeFX.iframesCheck($(this));
-					}).addClass('open'); 
-				}
-				e.preventDefault();
-			});		
+			t.click(function(		
 		},
 		rft : function(e,i){
 			var html = "";
