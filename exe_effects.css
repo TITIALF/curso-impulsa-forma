@@ -167,12 +167,6 @@ background:#FFF;
   transition: transform 0.3s ease;
 }
 
-.exe-fx.exe-accordion h2.active::after,
-.exe-fx.exe-accordion h2.expanded::after,
-.exe-fx.exe-accordion h2.ui-accordion-header-active::after { 
+.exe-fx.exe-accordion h2.active::after { 
   transform: translateY(-50%) rotate(180deg);
-}
-
-.exe-fx.exe-accordion h2.active::after {
-  transform: translateY(-50%) rotate(180deg); /* flecha rota al abrir */
 }
