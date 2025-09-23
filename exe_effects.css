@@ -151,22 +151,13 @@ color:#FFF;
 .emphasis1 .fx-pagination a{
 background:#FFF;
 }
-/* --- Flechas acordeón definitivas --- */
-.exe-accordion h2 {
-  position: relative;
-  padding-right: 25px; /* espacio para la flecha */
-  cursor: pointer;
-}
-
+/* Flecha gira al abrir acordeón */
 .exe-accordion h2::after {
   content: "▼";
-  position: absolute;
-  right: 5px; /* acerca la flecha al título */
-  top: 50%;
-  transform: translateY(-50%);
+  float: right; /* deja en extremo derecho automáticamente */
   transition: transform 0.3s ease;
 }
 
 .exe-accordion h2.ui-accordion-header-active::after {
-  transform: translateY(-50%) rotate(180deg);
+  transform: rotate(180deg);
 }
