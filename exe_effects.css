@@ -151,4 +151,22 @@ color:#FFF;
 .emphasis1 .fx-pagination a{
 background:#FFF;
 }
+/* --- BLOQUE DEFINITIVO PARA FLECHAS DE ACORDEÓN --- */
+.exe-fx.exe-accordion h2 {
+  position: relative;
+  padding-right: 30px; /* espacio para la flecha */
+  cursor: pointer;
+}
 
+.exe-fx.exe-accordion h2::after {
+  content: '▼'; /* flecha hacia abajo por defecto */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.exe-fx.exe-accordion h2.active::after {
+  transform: translateY(-50%) rotate(180deg); /* flecha rota al abrir */
+}
