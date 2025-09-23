@@ -151,13 +151,24 @@ color:#FFF;
 .emphasis1 .fx-pagination a{
 background:#FFF;
 }
-/* Flecha gira al abrir acordeón */
+/* Flecha acordeón: giro y posición base */
+.exe-accordion h2 {
+  position: relative;
+  padding-right: 25px; /* espacio para la flecha */
+  cursor: pointer;
+}
+
 .exe-accordion h2::after {
   content: "▼";
-  float: right; /* deja en extremo derecho automáticamente */
+  position: absolute;
+  right: 10px; /* posición base */
+  top: 50%;
+  transform: translateY(-50%);
   transition: transform 0.3s ease;
 }
 
-.exe-accordion h2.ui-accordion-header-active::after {
-  transform: rotate(180deg);
+/* Gira cuando tiene la clase activa o expanded */
+.exe-accordion h2.active::after,
+.exe-accordion h2.expanded::after {
+  transform: translateY(-50%) rotate(180deg);
 }
