@@ -171,3 +171,14 @@ background:#FFF;
 .exe-accordion h2.expanded::after {
   transform: translateY(-50%) rotate(180deg); /* gira al abrir */
 }
+/* Flecha normal en acordeón */
+.exe-accordion h2::after {
+  content: "▼";
+  float: right;
+  transition: transform 0.3s ease;
+}
+
+/* Flecha girada cuando está activo */
+.exe-accordion h2.active::after {
+  transform: rotate(180deg);
+}
