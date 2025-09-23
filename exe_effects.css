@@ -151,7 +151,7 @@ color:#FFF;
 .emphasis1 .fx-pagination a{
 background:#FFF;
 }
-/* --- BLOQUE FUNCIONAL PARA FLECHAS DE ACORDEÓN --- */
+/* --- Flechas acordeón definitivas --- */
 .exe-accordion h2 {
   position: relative;
   padding-right: 25px; /* espacio para la flecha */
@@ -161,24 +161,12 @@ background:#FFF;
 .exe-accordion h2::after {
   content: "▼";
   position: absolute;
-  right: 10px; /* cerca del título */
+  right: 5px; /* acerca la flecha al título */
   top: 50%;
   transform: translateY(-50%);
   transition: transform 0.3s ease;
 }
 
-.exe-accordion h2.active::after,
-.exe-accordion h2.expanded::after {
-  transform: translateY(-50%) rotate(180deg); /* gira al abrir */
-}
-/* Flecha normal en acordeón */
-.exe-accordion h2::after {
-  content: "▼";
-  float: right;
-  transition: transform 0.3s ease;
-}
-
-/* Flecha girada cuando está activo */
-.exe-accordion h2.active::after {
-  transform: rotate(180deg);
+.exe-accordion h2.ui-accordion-header-active::after {
+  transform: translateY(-50%) rotate(180deg);
 }
