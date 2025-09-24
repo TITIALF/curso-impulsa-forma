@@ -21,7 +21,6 @@ $exeFX = {
         $("."+k+"-fx").each(function(i){
             var c = this.className;
             if (c.indexOf(" "+k+"-accordion")!=-1) $exeFX.accordion.init(this,i);
-            else if (c.indexOf(" "+k+"-collapsible")!=-1) $exeFX.collapsible.init(this,i);
             else if (c.indexOf(" "+k+"-tabs")!=-1) $exeFX.tabs.init(this,i);
             else if (c.indexOf(" "+k+"-paginated")!=-1) $exeFX.paginated.init(this,i);
             else if (c.indexOf(" "+k+"-carousel")!=-1) $exeFX.carousel.init(this,i);
@@ -107,7 +106,7 @@ $exeFX = {
         return (n.indexOf('msie') != -1) ? parseInt(n.split('msie')[1]) : false;
     },
 
-    // ===== Accordion (primer desplegable) =====
+    // ===== Accordion =====
     accordion : {
         closeBlock : function(aID){
             var k = $exeFX.baseClass;
@@ -171,17 +170,21 @@ $exeFX = {
         }
     },
 
-    // ===== Collapsible (segundo desplegable) =====
-    collapsible : {
-        enable : function(e){
-            $(".fx-collapsible-title",e).click(function(ev){
-                ev.preventDefault();
-                $(this).toggleClass('active');
-                $(this).next('.fx-collapsible-content').slideToggle(300).toggleClass('open');
-            });
+    // ===== Tabs =====
+    tabs : {
+        show : function(gID,id){
+            var g = $("#"+gID);
+            $(".fx-tabs li",g).removeClass("fx-current").removeClass("fx-C2");
+            $("#"+id+"-link").addClass("fx-current fx-C2");
+            $(".fx-tab-content",g).removeClass("fx-current");
+            var block = $("#"+id);
+            block.addClass("fx-current");
+            $exeFX.iframesCheck(block);
         },
         rft : function(e,i){
             var html = "";
+            var k = $exeFX.baseClass;
+            var gID = k+"-tabs-"+i;
             var h = e.html();
             h = $exeFX.rftTitles(h);
             var p = h.split('<'+$exeFX.h2+'>');
@@ -192,35 +195,76 @@ $exeFX = {
             }
 
             if ($exeFX.isOldBrowser) {
-                html = html.replace(/<H2>/g, '<h2 class="fx-collapsible-title">');
-                html = html.replace(/<\/H2>/g, '</h2><div class="fx-collapsible-content">');
+                html = html.replace(/<H2/g, '</div>\n<H2');
+                html = html.replace('</div>\n<H2','<H2');
+                html = html.replace(/<H2/g, '<div class="fx-tab-content fx-C2">\n<H2 class="sr-av"');
             } else {
-                html = html.replace(/<h2>/g, '<h2 class="fx-collapsible-title">');
-                html = html.replace(/<\/h2>/g, '</h2><div class="fx-collapsible-content">');
+                html = html.replace(/<h2/g, '</div>\n<h2');
+                html = html.replace('</div>\n<h2','<h2');
+                html = html.replace(/<h2/g, '<div class="fx-tab-content fx-C2">\n<h2 class="sr-av"');
             }
-
-            html = html + '</div>';
 
             if (html=="") { $exeFX.noFX(e); return; }
 
-            e.html('<div id="exe-collapsible-'+i+'">\n<div class="fx-collapsible-section">\n'+html+'\n</div>\n</div>\n');
+            html = html + '</div>';
+            e.attr("id",gID).html(html);
 
-            var h2 = $("h2",e);
-            $(".fx-collapsible-content",e).each(function(y){
-                var id = "exe-collapsible-"+i+"-"+y;
+            var ul = '<ul class="fx-tabs">\n';
+            $(".fx-tab-content",e).each(function(y){
+                var h2 = $("H2",this).eq(0);
+                var t = y+1;
+                if (h2.length>0) t = h2.text();
+                var hT = $("SPAN",h2);
+                if (hT.length==1){
+                    hT = hT.eq(0).attr("title");
+                    if(hT){ t=hT; h2.removeClass("sr-av");}
+                }
+                var id = k+"-tab-"+i+"-"+y;
+                var c = "";
+                if (y==0){ c=' class="fx-current fx-C2"'; this.className += " fx-current fx-default-panel"; }
+                ul += '<li'+c+' id="'+id+'-link"><a href="#'+id+'" class="exeFXTabLink'+gID+'">'+t+'</a></li>\n';
                 this.id = id;
-                h2.eq(y).wrap('<a class="fx-collapsible-title fx-collapsible-title-'+y+' fx-C1" href="#'+id+'" id="'+id.replace(/-/g,"_")+'-trigger"></a>');
             });
-            $exeFX.collapsible.enable(e);
+            ul += '</ul>\n';
+            e.prepend(ul);
+
+            $("a.exeFXTabLink"+gID).click(function(ev){
+                ev.preventDefault();
+                var id = $(this).attr("href").substring(1);
+                $exeFX.tabs.show(gID,id);
+            });
         },
-        init : function(x,i){
-            var e = $(x);
-            var a = $("h2",e);
-            if (a.length>0) $exeFX.collapsible.rft(e,i);
-            else $exeFX.noFX(e);
+        init : function(e,i){
+            $exeFX.tabs.rft($(e),i);
         }
     },
 
-    // ===== Tabs =====
-    // (… aquí sigue igual lo que ya tienes: tabs, paginated, carousel, timeline …)
+    // ===== Paginated (similares a tabs) =====
+    paginated : {
+        init : function(e,i){
+            // Aquí puedes añadir paginación si se requiere
+            $exeFX.noFX($(e));
+        }
+    },
+
+    // ===== Carousel =====
+    carousel : {
+        init : function(e,i){
+            // Aquí puedes añadir inicialización de carrusel si se requiere
+            $exeFX.noFX($(e));
+        }
+    },
+
+    // ===== Timeline =====
+    timeline : {
+        init : function(e,i){
+            // Aquí puedes añadir inicialización de timeline si se requiere
+            $exeFX.noFX($(e));
+        }
+    }
 };
+
+// ===== Inicialización automática =====
+$(document).ready(function(){
+    $exeFX.init();
+});
