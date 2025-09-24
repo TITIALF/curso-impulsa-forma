@@ -475,7 +475,6 @@ html = html + '</div>';
 			ul += '<li id="'+k+'-paginated-'+i+'-next" class="fx-prev-next fx-next';
 if (!hasNext) {
 				ul += ' fx-disabled';
-				css = 'fx-disabled-link';
 			}
 			ul +='"><a href="#" id="'+k+'-paginated-'+i+'-next-lnk" title="'+$exe_i18n.next+'" class="'+css+'"><span>&#9658;</span><span class="sr-av"> '+$exe_i18n.next+'</span></a></li>';
 			ul += '</ul>';
