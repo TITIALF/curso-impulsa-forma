@@ -143,11 +143,9 @@ $exeFX = {
 
 			var k = $exeFX.baseClass;
 			if ($exeFX.isOldBrowser) {
-    html = html.replace(/<H2/g, '<div class="fx-accordion-content">\n<H2');
-    html = html.replace(/<\/H2>/g, '</H2>\n</div>');				
+    html = html.replace(/<\/H2>/g, '</H2>\n<div class="fx-accordion-content">');
 } else {
-    html = html.replace(/<h2/g, '<div class="fx-accordion-content">\n<h2');
-    html = html.replace(/<\/h2>/g, '</h2>\n</div>');
+    html = html.replace(/<\/h2>/g, '</h2>\n<div class="fx-accordion-content">');
 }
 			
 			// Something went wrong (see #318)
