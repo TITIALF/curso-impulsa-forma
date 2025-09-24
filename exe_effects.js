@@ -103,25 +103,19 @@ $exeFX = {
 			$('.fx-accordion-title',"#"+aID).removeClass('active');
 			$('.fx-accordion-content',"#"+aID).slideUp(300).removeClass('open');		
 		},
-		enable : function(x){
-			var k = $exeFX.baseClass;
-			var t = $('.fx-accordion-title',x);
-			// Get the box shadow color
-			var color = '';
-			var title = t.eq(0);
-			if (title.length==1) {
-				color = title.css("background-color");
-				if (typeof(color)=="string") {
-					color = color.replace("rgb(","rgba(").replace(")",",0.5)");
-					if (color.indexOf("rgba(")==0) x.css("box-shadow","0px 1px 3px "+color);
-					// Get border color (titles)
-					color = x.css("background-color");
-					if (typeof(color)=="string") {
-						color = color.replace("rgb(","rgba(").replace(")",",0.2)");
-						if (color.indexOf("rgba(")==0) {
-							t.each(function(){
-								this.style.borderColor=color;
-							});
+		t.click(function(e){
+    e.preventDefault();
+    var parent = $(this).parent();
+    if($(this).hasClass('active')){
+        $(this).removeClass('active');
+        $('.fx-accordion-content',parent).slideUp(300).removeClass('open');
+    } else {
+        $('.fx-accordion-title',parent).removeClass('active');
+        $('.fx-accordion-content',parent).slideUp(300).removeClass('open');
+        $(this).addClass('active');
+        $(this).next('.fx-accordion-content').slideDown(300).addClass('open');
+    }
+});
 						}
 					}
 				}
