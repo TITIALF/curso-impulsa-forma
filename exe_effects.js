@@ -1,6 +1,6 @@
 // Effects Plugin for eXeLearning (CORREGIDO COMPLETO)
 // By Ignacio Gros (http://www.gros.es/) for eXeLearning (http://exelearning.net/)
-// CORRECCIONES por Alfonso Sánchez para restaurar desplegables y normalizar HTML
+// CORRECCIONES por Alfonso Sánchez para restaurar 2 desplegables y normalizar HTML
 // Creative Commons Attribution-ShareAlike (http://creativecommons.org/licenses/by-sa/3.0/)
 
 $exeFX = {
@@ -18,6 +18,7 @@ $exeFX = {
         var k = $exeFX.baseClass;
         var f = $("."+k+"-fx");
         var hasTimeLines = false;
+
         $("."+k+"-fx").each(function(i){
             var c = this.className;
             if (c.indexOf(" "+k+"-accordion")!=-1) $exeFX.accordion.init(this,i);
@@ -29,6 +30,7 @@ $exeFX = {
                 hasTimeLines = true;
             }
         });
+
         if (hasTimeLines) {
             setTimeout(function(){$.timeliner({});},500);
         }
@@ -49,14 +51,13 @@ $exeFX = {
     },
 
     iframesCheck : function(block){
-        var iframes = $("iframe",block);
-        iframes.each(function(){
+        $("iframe",block).each(function(){
             if (this.src && typeof(this.src)=="string"){
                 var e = $(this);
                 var c = "exeFXcheckedIframe";
                 if (!e.hasClass(c)){
                     e.addClass(c);
-                    this.src = this.src; // reload once
+                    this.src = this.src;
                 }
             }
         });
@@ -139,7 +140,6 @@ $exeFX = {
                 }
             }
 
-            var k = $exeFX.baseClass;
             if ($exeFX.isOldBrowser) {
                 html = html.replace(/<H2>/g, '<h2 class="fx-accordion-title">');
                 html = html.replace(/<\/H2>/g, '</h2><div class="fx-accordion-content">');
@@ -148,18 +148,18 @@ $exeFX = {
                 html = html.replace(/<\/h2>/g, '</h2><div class="fx-accordion-content">');
             }
 
-            html = html + '</div>'; // cierre único de último div
+            html = html + '</div>';
 
             if (html=="") { $exeFX.noFX(e); return; }
 
-            e.html('<div id="'+k+'-accordion-'+i+'">\n<div class="fx-accordion-section">\n'+html+'\n</div>\n</div>\n');
+            e.html('<div id="'+$exeFX.baseClass+'-accordion-'+i+'">\n<div class="fx-accordion-section">\n'+html+'\n</div>\n</div>\n');
 
-            var h2 = $("h2",e);
-            $(".fx-accordion-content",e).each(function(y){
-                var id = k+"-accordion-"+i+"-"+y;
+            $("h2",e).each(function(y){
+                var id = $exeFX.baseClass+"-accordion-"+i+"-"+y;
                 this.id = id;
-                h2.eq(y).wrap('<a class="fx-accordion-title fx-accordion-title-'+y+' fx-C1" href="#'+id+'" id="'+id.replace(/-/g,"_")+'-trigger"></a>');
+                $(this).wrap('<a class="fx-accordion-title fx-accordion-title-'+y+' fx-C1" href="#'+id+'" id="'+id.replace(/-/g,"_")+'-trigger"></a>');
             });
+
             $exeFX.accordion.enable(e);
         },
         init : function(x,i){
@@ -204,8 +204,6 @@ $exeFX = {
                 html = html.replace(/<h2/g, '<div class="fx-tab-content fx-C2">\n<h2 class="sr-av"');
             }
 
-            if (html=="") { $exeFX.noFX(e); return; }
-
             html = html + '</div>';
             e.attr("id",gID).html(html);
 
@@ -223,43 +221,18 @@ $exeFX = {
                 var c = "";
                 if (y==0){ c=' class="fx-current fx-C2"'; this.className += " fx-current fx-default-panel"; }
                 ul += '<li'+c+' id="'+id+'-link"><a href="#'+id+'" class="exeFXTabLink'+gID+'">'+t+'</a></li>\n';
-                this.id = id;
             });
             ul += '</ul>\n';
             e.prepend(ul);
 
-            $("a.exeFXTabLink"+gID).click(function(ev){
+            $(".exeFXTabLink"+gID).click(function(ev){
                 ev.preventDefault();
-                var id = $(this).attr("href").substring(1);
+                var id = $(this).attr("href").substr(1);
                 $exeFX.tabs.show(gID,id);
             });
         },
-        init : function(e,i){
-            $exeFX.tabs.rft($(e),i);
-        }
-    },
-
-    // ===== Paginated (similares a tabs) =====
-    paginated : {
-        init : function(e,i){
-            // Aquí puedes añadir paginación si se requiere
-            $exeFX.noFX($(e));
-        }
-    },
-
-    // ===== Carousel =====
-    carousel : {
-        init : function(e,i){
-            // Aquí puedes añadir inicialización de carrusel si se requiere
-            $exeFX.noFX($(e));
-        }
-    },
-
-    // ===== Timeline =====
-    timeline : {
-        init : function(e,i){
-            // Aquí puedes añadir inicialización de timeline si se requiere
-            $exeFX.noFX($(e));
+        init : function(x,i){
+            $exeFX.tabs.rft($(x),i);
         }
     }
 };
