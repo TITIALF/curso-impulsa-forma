@@ -142,11 +142,16 @@ $exeFX = {
 			}			
 
 			var k = $exeFX.baseClass;
-			if ($exeFX.isOldBrowser) {
-    html = html.replace(/<\/H2>/g, '</H2>\n<div class="fx-accordion-content">');
+if ($exeFX.isOldBrowser) {
+    html = html.replace(/<H2>/g, '<h2 class="fx-accordion-title">'); 
+    html = html.replace(/<\/H2>/g, '</h2><div class="fx-accordion-content">'); 
 } else {
-    html = html.replace(/<\/h2>/g, '</h2>\n<div class="fx-accordion-content">');
+    html = html.replace(/<h2>/g, '<h2 class="fx-accordion-title">');
+    html = html.replace(/<\/h2>/g, '</h2><div class="fx-accordion-content">');
 }
+
+// Cerrar el último div de contenido
+html = html + '</div>';
 			
 			// Something went wrong (see #318)
 			if (html=="") {
