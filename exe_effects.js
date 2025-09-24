@@ -473,8 +473,7 @@ html = html + '</div>';
 			});
 			if (counter>1) hasNext = true;
 			ul += '<li id="'+k+'-paginated-'+i+'-next" class="fx-prev-next fx-next';
-			var css = 'exeFXPageLink'+gID+'_'+gID+'-1_1';
-			if (!hasNext) {
+if (!hasNext) {
 				ul += ' fx-disabled';
 				css = 'fx-disabled-link';
 			}
