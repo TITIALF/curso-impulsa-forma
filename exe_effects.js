@@ -128,11 +128,7 @@ $exeFX = {
         else $exeFX.noFX(e);
     }
 },
-					}
-				}
-			}			
-			// onclick
-			t.click(function(		
+							
 		},
 		rft : function(e,i){
 			var html = "";
