@@ -28,20 +28,7 @@
 .fx-accordion-section:last-child .fx-accordion-title{border-bottom:none}
 .fx-accordion-content{padding:0 15px;display:none}
 
-/* Este es el código que añade la flecha giratoria */
-.toggle-idevice:after {
-    content: "▼";
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #333;
-    transition: transform 0.3s ease;
-}
 
-.toggle-idevice.show-idevice:after {
-    transform: translateY(-50%) rotate(180deg);
-}
 
 .exe-tabs{margin:2em auto;width:90%}
 .js .exe-tabs{width:96%}
