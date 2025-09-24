@@ -4,13 +4,13 @@
 $exeFX = {
 	baseClass : "exe",
 	h2 : "h2",
-	isOldBrowser : false,	
+	isOldBrowser : false,
 	init : function(){
 		var ie = $exeFX.checkIE();
 		if ((!isNaN(parseFloat(ie)) && isFinite(ie)) && ie<9) {
-			$exeFX.isOldBrowser = true;	
-			$exeFX.h2 = "H2";	
-		}		
+			$exeFX.isOldBrowser = true;
+			$exeFX.h2 = "H2";
+		}
 		var k = $exeFX.baseClass;
 		var f = $("."+k+"-fx");
 		var hasTimeLines = false;
@@ -41,7 +41,7 @@ $exeFX = {
 		c += "("+r+","+g+","+b+"";
 		if (a) c+= ","+a;
 		c += ")";
-		return c;		
+		return c;
 	},
 	iframesCheck : function(block){
 		// Some external contents won't be properly displayed if they're hidden by default
@@ -65,11 +65,11 @@ $exeFX = {
 			t = t.replace(xmlnsStringExp, 'h2');
 		}
 		return t;
-	},	
+	},
 	rftTitles : function(t) {
 		// Remove all attributes (except the title)
 		var div = $("<div></div>");
-		div.html(t);		
+		div.html(t);
 		$("h2",div).each(function() {
 			var attributes = $.map(this.attributes, function(item) {
 				return item.name;
@@ -78,18 +78,18 @@ $exeFX = {
 			$.each(attributes, function(i, item) {
 				if (item.toLowerCase()!="title") title.removeAttr(item);
 			});
-		});		
+		});
 		t = div.html();
 		// Remove xmlns="http://www.w3.org/1999/xhtml"
-		t = $exeFX.removeXMLNS(t);		
+		t = $exeFX.removeXMLNS(t);
 		// Replace <h2 title=""></h2> by <h2><span title=""></span></h2>. That's how TinyMCE inserts the title when using the Insert/Edit Attributes option
 		var s = t.split('<'+$exeFX.h2+' title="');
 		var n ="";
 		if (s.length<2) return t;
 		for (var i=0;i<s.length;i++) {
-		  n += s[i];
-		  if (i<(s.length-1))n += '<'+$exeFX.h2+'><span title="';
-		  n = n.replace("</"+$exeFX.h2+">","</span></"+$exeFX.h2+">");
+		  n += s[i];
+		  if (i<(s.length-1))n += '<'+$exeFX.h2+'><span title="';
+		  n = n.replace("</"+$exeFX.h2+">","</span></"+$exeFX.h2+">");
 		}
 		return n;
 	},
@@ -98,37 +98,25 @@ $exeFX = {
 		e.attr("class","").css("padding","1em");
 	},
 	accordion : {
-    closeBlock : function(aID){
-        var k = $exeFX.baseClass;
-        $('.fx-accordion-title',"#"+aID).removeClass('active');
-        $('.fx-accordion-content',"#"+aID).slideUp(300).removeClass('open');		
-    },
-    enable : function(e){
-        $(".fx-accordion-title",e).click(function(ev){
-            ev.preventDefault();
-            var parent = $(this).parent();
-            if($(this).hasClass('active')){
-                $(this).removeClass('active');
-                $('.fx-accordion-content',parent).slideUp(300).removeClass('open');
-            } else {
-                $('.fx-accordion-title',parent).removeClass('active');
-                $('.fx-accordion-content',parent).slideUp(300).removeClass('open');
-                $(this).addClass('active');
-                $(this).next('.fx-accordion-content').slideDown(300).addClass('open');
-            }
-        });
-    },
-    rft : function(e,i){
-        // ... aquí sigues con tu código existente
-    },
-    init : function(x,i){
-        var e = $(x);
-        var a = $("h2",e);
-        if (a.length>0) $exeFX.accordion.rft(e,i);
-        else $exeFX.noFX(e);
-    }
-},
-							
+		closeBlock : function(aID){
+			var k = $exeFX.baseClass;
+			$('.fx-accordion-title',"#"+aID).removeClass('active');
+			$('.fx-accordion-content',"#"+aID).slideUp(300).removeClass('open');
+		},
+		enable : function(e){
+			$(".fx-accordion-title",e).click(function(ev){
+				ev.preventDefault();
+				var parent = $(this).parent();
+				if($(this).hasClass('active')){
+					$(this).removeClass('active');
+					$('.fx-accordion-content',parent).slideUp(300).removeClass('open');
+				} else {
+					$('.fx-accordion-title',parent).removeClass('active');
+					$('.fx-accordion-content',parent).slideUp(300).removeClass('open');
+					$(this).addClass('active');
+					$(this).next('.fx-accordion-content').slideDown(300).addClass('open');
+				}
+			});
 		},
 		rft : function(e,i){
 			var html = "";
@@ -139,26 +127,22 @@ $exeFX = {
 				for (var x=1; x<p.length; x++) {
 					html += '<'+$exeFX.h2+'>'+p[x];
 				}
-			}			
-
+			}
 			var k = $exeFX.baseClass;
-if ($exeFX.isOldBrowser) {
-    html = html.replace(/<H2>/g, '<h2 class="fx-accordion-title">'); 
-    html = html.replace(/<\/H2>/g, '</h2><div class="fx-accordion-content">'); 
-} else {
-    html = html.replace(/<h2>/g, '<h2 class="fx-accordion-title">');
-    html = html.replace(/<\/h2>/g, '</h2><div class="fx-accordion-content">');
-}
-
-// Cerrar el último div de contenido
-html = html + '</div>';
-			
+			if ($exeFX.isOldBrowser) {
+				html = html.replace(/<H2>/g, '<h2 class="fx-accordion-title">');
+				html = html.replace(/<\/H2>/g, '</h2><div class="fx-accordion-content">');
+			} else {
+				html = html.replace(/<h2>/g, '<h2 class="fx-accordion-title">');
+				html = html.replace(/<\/h2>/g, '</h2><div class="fx-accordion-content">');
+			}
+			// Cerrar el último div de contenido
+			html = html + '</div>';
 			// Something went wrong (see #318)
 			if (html=="") {
 				$exeFX.noFX(e);
 				return;
-			}			
-
+			}
 			html = html + '</div>';
 			e.html('<div id="'+k+'-accordion-'+i+'">\n<div class="fx-accordion-section">\n'+html+'\n</div>\n</div>\n');
 			var h2 = $("h2",e);
@@ -193,7 +177,7 @@ html = html + '</div>';
 			var h2 = "<h2>";
 			var _h2 = "</h2>";
 			var h3 = "<h3>";
-			var _h3 = "<h3>";						
+			var _h3 = "</h3>";
 			var oldB = false;
 			if (o.indexOf("<H2")!=-1) {
 				h2 = "<H2>";
@@ -222,25 +206,25 @@ html = html + '</div>';
 						partTitle = part2[0];
 						partContent = part2[1];
 						// Count the number of H3 in each content
-						var p2 = partContent.split(_h3)									
+						var p2 = partContent.split(_h3)
 						if (p2.length==1 || p2.length==0) {
 							partTitle = "";
-							partContent = "";										
+							partContent = "";
 						} else {
 							if (oldB) {
 								partContent = partContent.replace(/\<\/H3>/g,'</a></h3>\n<div class="fx-timeline-event" style="display:none">');
-								partContent = partContent.replace(/\<H3>/g,'</div>\n<h3 class="fx-timeline-event-trigger"><a href="#" style="color:'+mainColor+'" title="'+$exe_i18n.show+'/'+$exe_i18n.hide+'">');								
+								partContent = partContent.replace(/\<H3>/g,'</div>\n<h3 class="fx-timeline-event-trigger"><a href="#" style="color:'+mainColor+'" title="'+$exe_i18n.show+'/'+$exe_i18n.hide+'">');
 							} else {
 								partContent = partContent.replace(/\<\/h3>/g,'</a></h3>\n<div class="fx-timeline-event" style="display:none">');
 								partContent = partContent.replace(/\<h3>/g,'</div>\n<h3 class="fx-timeline-event-trigger"><a href="#" style="color:'+mainColor+'" title="'+$exe_i18n.show+'/'+$exe_i18n.hide+'">');
-							}					
+							}
 							partContent = partContent.replace('</div>','');
 							partContent += '</div>';
 							partContent = '<div class="fx-timeline-major">\n<h2 class="fx-timeline-marker" title="'+$exe_i18n.show+'/'+$exe_i18n.hide+'"><span><a href="#" style="background:'+mainColor+'">'+partTitle+'</a></span></h2>\n<div class="fx-timeline-minor">\n'+partContent+'\n</div>\n</div>'
 							html += partContent;
 						}
-					}								
-				}							
+					}
+				}
 			}
 			if (html!="") {
 				e.addClass("fx-timeline-container").css("border-color",mainColor);
@@ -248,7 +232,7 @@ html = html + '</div>';
 				if ((!isNaN(parseFloat(ie)) && isFinite(ie)) && ie<8) {
 					e.addClass("fx-static-timeline-container");
 					html = html.replace(/<h2/g, '<span class="fx-ie-dash">—</span><h2');
-					e.html(html);	
+					e.html(html);
 				} else {
 					e.html('<div class="fx-timeline-toggler"><p><a href="#" class="fx-timeline-expand" style="background-color:'+mainColor+';color:'+titlesColor+'">'+$exe_i18n.show+'</a></p></div>'+html)
 				}
@@ -304,20 +288,16 @@ html = html + '</div>';
 				html = html.replace('</div>\n<h2','<h2');
 				html = html.replace(/<h2/g, '<div class="fx-tab-content fx-C2">\n<h2 class="sr-av"');
 			}
-			
 			// Something went wrong (see #318)
 			if (html=="") {
 				$exeFX.noFX(e);
 				return;
-			}		
-			
+			}
 			html = html + '</div>';
 			e.attr("id",gID).html(html);
-			
 			var ul = '<ul class="fx-tabs">\n';
 			$(".fx-tab-content",e).each(function(y){
 				var h2 = $("H2",this).eq(0);
-				
 				// Default tab title
 				var t = y+1;
 				if (h2.length==0) {
@@ -331,7 +311,6 @@ html = html + '</div>';
 					// Normal behavior
 					t = h2.text();
 				}
-				
 				var hT = $("SPAN",h2);
 				if (hT.length==1) {
 					hT = hT.eq(0).attr("title");
@@ -367,7 +346,7 @@ html = html + '</div>';
 					return false;
 				}
 			);
-		},	
+		},
 		init : function(x,i){
 			var e = $(x);
 			var a = $("h2",e);
@@ -380,7 +359,6 @@ html = html + '</div>';
 			n = parseInt(n);
 			var g = $("#"+gID);
 			var lis = $(".fx-pagination li",g);
-			
 			// Pagination
 			var l = (lis.length-2);
 			if (l==1) return false;
@@ -409,14 +387,13 @@ html = html + '</div>';
 					nextA.className = "exeFXPageLink"+gID+"_"+gID+"-"+(n+1)+"_"+(n+1);
 				}
 			}
-			
 			lis.removeClass("fx-current").removeClass("fx-C1");
 			$("#"+id+"-link").addClass("fx-current fx-C1");
 			$(".fx-page-content",g).removeClass("fx-current");
 			var block = $("#"+id);
 			block.addClass("fx-current");
 			$exeFX.iframesCheck(block);
-		},	
+		},
 		init : function(x,i){
 			var e = $(x);
 			var a = $("h2",e);
@@ -438,22 +415,19 @@ html = html + '</div>';
 			if ($exeFX.isOldBrowser) {
 				html = html.replace(/<H2/g, '</div>\n<H2');
 				html = html.replace('</div>\n<H2','<H2');
-				html = html.replace(/<H2/g, '<div class="fx-page-content fx-C2">\n<H2');				
+				html = html.replace(/<H2/g, '<div class="fx-page-content fx-C2">\n<H2');
 			} else {
 				html = html.replace(/<h2/g, '</div>\n<h2');
 				html = html.replace('</div>\n<h2','<h2');
 				html = html.replace(/<h2/g, '<div class="fx-page-content fx-C2">\n<h2');
 			}
-			
 			// Something went wrong (see #318)
 			if (html=="") {
 				$exeFX.noFX(e);
 				return;
-			}			
-			
+			}
 			html = html + '</div>';
 			e.attr("id",gID).html(html);
-			
 			var counter = 0;
 			var hasNext = false;
 			var ul = '<ul class="fx-pagination">\n';
@@ -473,11 +447,11 @@ html = html + '</div>';
 			});
 			if (counter>1) hasNext = true;
 			ul += '<li id="'+k+'-paginated-'+i+'-next" class="fx-prev-next fx-next';
-if (!hasNext) {
-    ul += ' fx-disabled"><a href="#" id="'+k+'-paginated-'+i+'-next-lnk" title="'+$exe_i18n.next+'" class="fx-disabled-link"><span>&#9658;</span><span class="sr-av"> '+$exe_i18n.next+'</span></a></li>\n';
-} else {
-    ul += '"><a href="#" id="'+k+'-paginated-'+i+'-next-lnk" title="'+$exe_i18n.next+'" class="exeFXPageLink'+gID+'_'+gID+'-1_1"><span>&#9658;</span><span class="sr-av"> '+$exe_i18n.next+'</span></a></li>\n';
-}
+			if (!hasNext) {
+				ul += ' fx-disabled"><a href="#" id="'+k+'-paginated-'+i+'-next-lnk" title="'+$exe_i18n.next+'" class="fx-disabled-link"><span>&#9658;</span><span class="sr-av"> '+$exe_i18n.next+'</span></a></li>\n';
+			} else {
+				ul += '"><a href="#" id="'+k+'-paginated-'+i+'-next-lnk" title="'+$exe_i18n.next+'" class="exeFXPageLink'+gID+'_'+gID+'-1_1"><span>&#9658;</span><span class="sr-av"> '+$exe_i18n.next+'</span></a></li>\n';
+			}
 			ul += '</ul>';
 			e.prepend(ul);
 			// onclick
@@ -499,7 +473,7 @@ if (!hasNext) {
 					}
 					return false;
 				}
-			);			
+			);
 		}
 	},
 	carousel : {
@@ -510,7 +484,6 @@ if (!hasNext) {
 			n = parseInt(n);
 			var g = $("#"+gID);
 			var lis = $(".fx-carousel-pagination li",g);
-			
 			// Pagination
 			var l = (lis.length-2);
 			if (l==1) return false;
@@ -542,7 +515,6 @@ if (!hasNext) {
 					nextA.className = "exeFXSlideLink"+gID+"_"+gID+"-"+(n+1)+"_"+(n+1);
 				}
 			}
-			
 			lis.removeClass("fx-current").removeClass("fx-C1");
 			$("#"+id+"-link").addClass("fx-current fx-C1");
 			$(".fx-carousel-content",g).hide();
@@ -550,7 +522,7 @@ if (!hasNext) {
 				$exeFX.carousel.isWorking = false;
 				$exeFX.iframesCheck($(this));
 			});
-		},	
+		},
 		init : function(x,i){
 			var e = $(x);
 			var a = $("h2",e);
@@ -578,16 +550,13 @@ if (!hasNext) {
 				html = html.replace('</div>\n<h2','<h2');
 				html = html.replace(/<h2/g, '<div class="fx-carousel-content fx-C2">\n<h2');
 			}
-			
 			// Something went wrong (see #318)
 			if (html=="") {
 				$exeFX.noFX(e);
 				return;
-			}			
-			
+			}
 			html = html + '</div>';
 			e.attr("id",gID).html(html);
-			
 			var counter = 0;
 			var hasNext = false;
 			var ul = '<ul class="fx-pagination fx-carousel-pagination">\n';
@@ -632,21 +601,21 @@ if (!hasNext) {
 					}
 					return false;
 				}
-			);			
+			);
 		}
 	},
 	checkIE : function(){
 		var n = navigator.userAgent.toLowerCase();
 		return (n.indexOf('msie') != -1) ? parseInt(n.split('msie')[1]) : false;
-	}	
+	}
 }
 $(function(){
 	$exeFX.init();
 });
 /*
 * Timeliner.js
-* @version      1.5.1
-* @copyright    Tarek Anandan (http://www.technotarek.com)
+* @version       1.5.1
+* @copyright     Tarek Anandan (http://www.technotarek.com)
 */
 ;(function(e){var t;e.timeliner=function(n){t=jQuery.extend({timelineContainer:".fx-timeline-container",startState:"closed",startOpen:[],baseSpeed:100,speed:4,fontOpen:"1.1em",fontClosed:"1em",expandAllText:$exe_i18n.show,collapseAllText:$exe_i18n.hide},n);e(document).ready(function(){function n(n,r){e(n).removeClass("closed").addClass("open").animate({fontSize:t.fontOpen},t.baseSpeed,
 // eXeLearning
