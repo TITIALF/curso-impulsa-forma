@@ -474,9 +474,10 @@ html = html + '</div>';
 			if (counter>1) hasNext = true;
 			ul += '<li id="'+k+'-paginated-'+i+'-next" class="fx-prev-next fx-next';
 if (!hasNext) {
-				ul += ' fx-disabled';
-			}
-			ul +='"><a href="#" id="'+k+'-paginated-'+i+'-next-lnk" title="'+$exe_i18n.next+'" class="'+css+'"><span>&#9658;</span><span class="sr-av"> '+$exe_i18n.next+'</span></a></li>';
+    ul += ' fx-disabled"><a href="#" id="'+k+'-paginated-'+i+'-next-lnk" title="'+$exe_i18n.next+'" class="fx-disabled-link"><span>&#9658;</span><span class="sr-av"> '+$exe_i18n.next+'</span></a></li>\n';
+} else {
+    ul += '"><a href="#" id="'+k+'-paginated-'+i+'-next-lnk" title="'+$exe_i18n.next+'" class="exeFXPageLink'+gID+'_'+gID+'-1_1"><span>&#9658;</span><span class="sr-av"> '+$exe_i18n.next+'</span></a></li>\n';
+}
 			ul += '</ul>';
 			e.prepend(ul);
 			// onclick
