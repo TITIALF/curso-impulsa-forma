@@ -1,55 +1,38 @@
-<style>
-details {
-  background: #f2f2f2;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  cursor: pointer;
-}
-summary {
-  font-weight: bold;
-  list-style: none;
-}
-details[open] summary::after {
-  content: "▲";
-  float: right;
-}
-summary::after {
-  content: "▼";
-  float: right;
-}
-details p {
-  margin: 8px 0 0;
-}
-</style>
+/* exe_effects.js - Original de eXeLearning */
 
-<details>
-  <summary>Título desplegable 1</summary>
-  <p>Contenido del primer desplegable.</p>
-  <details>
-    <summary>Subdesplegable 1.1</summary>
-    <p>Contenido del subdesplegable 1.1</p>
-  </details>
-  <details>
-    <summary>Subdesplegable 1.2</summary>
-    <p>Contenido del subdesplegable 1.2</p>
-  </details>
-</details>
+jQuery(document).ready(function($) {
+    // Efectos de desplegable
+    $(".other-section").hide(); // Oculta todos los submenús
+    $("li.daddy > a").click(function(e) {
+        e.preventDefault();
+        var $submenu = $(this).next(".other-section");
+        if ($submenu.is(":visible")) {
+            $submenu.slideUp("fast");
+            $(this).removeClass("open");
+        } else {
+            $submenu.slideDown("fast");
+            $(this).addClass("open");
+        }
+    });
+    
+    // Cambiar icono de flecha si se desea
+    $("li.daddy > a").each(function() {
+        $(this).append(' <span class="arrow">&#9662;</span>'); // Flecha hacia abajo
+    });
+    
+    $("li.daddy > a").click(function() {
+        $(this).find(".arrow").toggleClass("rotated");
+    });
+});
 
-<details>
-  <summary>Título desplegable 2</summary>
-  <p>Contenido del segundo desplegable.</p>
-  <details>
-    <summary>Subdesplegable 2.1</summary>
-    <p>Contenido del subdesplegable 2.1</p>
-  </details>
-  <details>
-    <summary>Subdesplegable 2.2</summary>
-    <p>Contenido del subdesplegable 2.2</p>
-  </details>
-</details>
+// CSS sugerido para la flecha rotada
+/*
+.arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
 
-<details>
-  <summary>Título desplegable 3</summary>
-  <p>Contenido del tercer desplegable.</p>
-</details>
+.rotated {
+    transform: rotate(180deg);
+}
+*/
