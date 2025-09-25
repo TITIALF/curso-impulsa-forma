@@ -1,55 +1,39 @@
-<style>
-details {
-  background: #f2f2f2;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  cursor: pointer;
-}
-summary {
-  font-weight: bold;
-  list-style: none;
-}
-details[open] summary::after {
-  content: "▲";
-  float: right;
-}
-summary::after {
-  content: "▼";
-  float: right;
-}
-details p {
-  margin: 8px 0 0;
-}
-</style>
+// exe_effects.js - Versión corregida para desplegables
+document.addEventListener("DOMContentLoaded", function () {
+    const toggles = document.querySelectorAll("#siteNav .daddy");
 
-<details>
-  <summary>Título desplegable 1</summary>
-  <p>Contenido del primer desplegable.</p>
-  <details>
-    <summary>Subdesplegable 1.1</summary>
-    <p>Contenido del subdesplegable 1.1</p>
-  </details>
-  <details>
-    <summary>Subdesplegable 1.2</summary>
-    <p>Contenido del subdesplegable 1.2</p>
-  </details>
-</details>
+    toggles.forEach((toggle) => {
+        // Inicializar flechas y secciones
+        const subMenu = toggle.nextElementSibling;
+        if (subMenu && subMenu.tagName === "UL") {
+            subMenu.style.display = "none";
+            toggle.classList.add("collapsed");
 
-<details>
-  <summary>Título desplegable 2</summary>
-  <p>Contenido del segundo desplegable.</p>
-  <details>
-    <summary>Subdesplegable 2.1</summary>
-    <p>Contenido del subdesplegable 2.1</p>
-  </details>
-  <details>
-    <summary>Subdesplegable 2.2</summary>
-    <p>Contenido del subdesplegable 2.2</p>
-  </details>
-</details>
+            // Crear ícono de flecha
+            const arrow = document.createElement("span");
+            arrow.classList.add("arrow");
+            arrow.innerHTML = "&#9654;"; // triángulo hacia la derecha
+            toggle.prepend(arrow);
 
-<details>
-  <summary>Título desplegable 3</summary>
-  <p>Contenido del tercer desplegable.</p>
-</details>
+            // Manejar clic
+            toggle.addEventListener("click", function (e) {
+                e.preventDefault();
+                if (subMenu.style.display === "none") {
+                    subMenu.style.display = "block";
+                    arrow.innerHTML = "&#9660;"; // triángulo hacia abajo
+                } else {
+                    subMenu.style.display = "none";
+                    arrow.innerHTML = "&#9654;";
+                }
+            });
+
+            // Hover opcional para cambio de color
+            toggle.addEventListener("mouseenter", function () {
+                toggle.style.backgroundColor = "#f0f0f0";
+            });
+            toggle.addEventListener("mouseleave", function () {
+                toggle.style.backgroundColor = "";
+            });
+        }
+    });
+});
