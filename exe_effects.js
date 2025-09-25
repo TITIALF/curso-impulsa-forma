@@ -1,154 +1,152 @@
-// Effects Plugin for eXeLearning (CORREGIDO COMPLETO)
-// By Ignacio Gros (http://www.gros.es/) for eXeLearning (http://exelearning.net/)
-// CORRECCIONES por Alfonso Sánchez para restaurar desplegables y normalizar HTML
-// Creative Commons Attribution-ShareAlike (http://creativecommons.org/licenses/by-sa/3.0/)
+<!doctype html>
+<html lang="es">
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" />
+<link rel="stylesheet" type="text/css" href="content.css" />
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<meta http-equiv="content-type" content="text/html;  charset=utf-8" />
+<title>Curso_Emprende_HTML </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta name="author" content="Alfonso Sánchez Cabrera" />
+<link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-sa/4.0/" />
+<meta name="generator" content="eXeLearning 2.9 - exelearning.net" />
+<meta name="description" content="Curso práctico para emprendedores titulado “Emprende con lo que tienes: Guía para empezar sin excusas”. Incluye estrategias, recursos personales, mentalidad emprendedora, análisis de mercado, modelo de negocio, marketing y más.
+" />
+<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
+<script type="text/javascript" src="exe_jquery.js"></script>
+<script type="text/javascript" src="common_i18n.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="exe-web-site" id="exe-node-0"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="#main" class="sr-av">Saltar la navegación</a></p>
+<header id="header" ><div id="headerContent">Curso_Emprende_HTML</div></header>
+<nav id="siteNav">
+<ul>
+   <li id="active"><a href="index.html" class="active daddy main-node">CURSO Emprende con lo que tienes: Guía para empezar sin excusas</a></li>
+   <li><a href="mdulo_1__gua_para__empezar_sin_excusas.html" class="daddy">MÓDULO 1 – GUÍA PARA  EMPEZAR SIN EXCUSAS</a>
+   <ul class="other-section">
+      <li><a href="introduccin.html" class="daddy">Introducción</a>
+      <ul class="other-section">
+         <li><a href="objetivos_de_aprendizaje.html" class="no-ch">Objetivos de aprendizaje</a></li>
+         <li><a href="identificando_tus_habilidades.html" class="daddy">Identificando tus habilidades</a>
+         <ul class="other-section">
+            <li><a href="descubriendo_oportunidades_a_tu_alrededor.html" class="daddy">Descubriendo oportunidades a tu alrededor</a>
+            <ul class="other-section">
+               <li><a href="recursos_personales.html" class="daddy">Recursos personales</a>
+               <ul class="other-section">
+                  <li><a href="conclusin_del_mdulo_1.html" class="daddy">Conclusión del módulo 1</a>
+                  <ul class="other-section">
+                     <li><a href="escanea_el_cdigo_qr_para_ver_pdf_resumen_del_mdulo1_y__luego__observa_el_video_resumen_anexo.html" class="daddy">Escanea el código QR para ver PDF resumen del Módulo1 y  luego  Observa el Video Resumen anexo.</a>
+                     <ul class="other-section">
+                        <li><a href="mdulo_2_de_la_idea_al_modelo_de_negocio_mentalidad_emprendedora.html" class="daddy">MÓDULO 2: De la idea al modelo de negocio. Mentalidad emprendedora.</a>
+                        <ul class="other-section">
+                           <li><a href="mentalidad_emprendedora.html" class="daddy">MENTALIDAD EMPRENDEDORA:</a>
+                           <ul class="other-section">
+                              <li><a href="el_perfil_del_emprendedor.html" class="daddy">El perfil del emprendedor</a>
+                              <ul class="other-section">
+                                 <li><a href="anlisis_de_mercado.html" class="daddy">Análisis de Mercado</a>
+                                 <ul class="other-section">
+                                    <li><a href="modelo_de_negocio.html" class="daddy">Modelo de Negocio</a>
+                                    <ul class="other-section">
+                                       <li><a href="plan_de_marketing.html" class="daddy">Plan de Marketing</a>
+                                       <ul class="other-section">
+                                          <li><a href="conclusin_mdulo_2.html" class="daddy">Conclusión Módulo 2</a>
+                                          <ul class="other-section">
+                                             <li><a href="escanea_el_cdigo_qr_para_ver_el_pdf_resumen_de_mdulo_2_y__luego__observa_el_video_anexo.html" class="daddy">Escanea el código QR para ver el PDF resumen de Módulo 2 y  luego  Observa el Video anexo</a>
+                                             <ul class="other-section">
+                                                <li><a href="modulo_3__finanzas_y_estrategias_de_promocin_y_crecimiento.html" class="daddy">Modulo 3 - Finanzas y Estrategias de Promoción y Crecimiento.</a>
+                                                <ul class="other-section">
+                                                   <li><a href="objetivos_de_aprendizaje0.html" class="daddy">Objetivos de aprendizaje</a>
+                                                   <ul class="other-section">
+                                                      <li><a href="proyecciones_financieras.html" class="daddy">Proyecciones Financieras.</a>
+                                                      <ul class="other-section">
+                                                         <li><a href="identificando_a_tu_pblico_objetivo.html" class="daddy">Identificando a tu Público Objetivo</a>
+                                                         <ul class="other-section">
+                                                            <li><a href="utilizando_redes_sociales.html" class="daddy">Utilizando Redes Sociales</a>
+                                                            <ul class="other-section">
+                                                               <li><a href="estrategias_de_marketing_de_contenido.html" class="daddy">Estrategias de Marketing de Contenido?????</a>
+                                                               <ul class="other-section">
+                                                                  <li><a href="colaboraciones_y_alianzas.html" class="daddy">Colaboraciones y Alianzas</a>
+                                                                  <ul class="other-section">
+                                                                     <li><a href="conclusin_mdulo_3_y_del_curso.html" class="daddy">Conclusión Módulo 3 y del Curso</a>
+                                                                     <ul class="other-section">
+                                                                        <li><a href="escanea_el_cdigo_qr_para_ver_el_pdf_resumen_del_mdulo_3____y____luego_observa_el_video_anexo.html" class="no-ch">Escanea el código QR para ver el PDF resumen del Módulo 3    y    luego Observa el Video Anexo.</a></li>
+                                                                     </ul>
+                                                                     </li>
+                                                                  </ul>
+                                                                  </li>
+                                                               </ul>
+                                                               </li>
+                                                            </ul>
+                                                            </li>
+                                                         </ul>
+                                                         </li>
+                                                      </ul>
+                                                      </li>
+                                                   </ul>
+                                                   </li>
+                                                </ul>
+                                                </li>
+                                             </ul>
+                                             </li>
+                                          </ul>
+                                          </li>
+                                       </ul>
+                                       </li>
+                                    </ul>
+                                    </li>
+                                 </ul>
+                                 </li>
+                              </ul>
+                              </li>
+                           </ul>
+                           </li>
+                        </ul>
+                        </li>
+                     </ul>
+                     </li>
+                  </ul>
+                  </li>
+               </ul>
+               </li>
+            </ul>
+            </li>
+         </ul>
+         </li>
+      </ul>
+      </li>
+   </ul>
+   </li>
+</ul>
+</nav>
+<div id='topPagination'>
+<nav class="pagination noprt">
+<a href="mdulo_1__gua_para__empezar_sin_excusas.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+<div id="main-wrapper">
+<section id="main">
+<header id="nodeDecoration"><h1 id="nodeTitle">CURSO Emprende con lo que tienes: Guía para empezar sin excusas</h1></header>
+<article class="iDevice_wrapper textIdevice" id="id0">
+<div class="iDevice emphasis0" >
+<div id="ta0_127_2" class="block iDevice_content">
+<div class="exe-text"><p style="text-align: center;"><span style="font-size: 24pt;"><strong>Bienvenido al curso Emprende con lo que tienes: Guía para empezar sin excusas</strong></span></p>
 
-$exeFX = {
-    baseClass: "exe",
-    h2: "h2",
-    isOldBrowser: false,
-
-    init: function () {
-        var ie = $exeFX.checkIE();
-        if ((!isNaN(parseFloat(ie)) && isFinite(ie)) && ie < 9) {
-            $exeFX.isOldBrowser = true;
-            $exeFX.h2 = "H2";
-        }
-        var k = $exeFX.baseClass;
-        var f = $("." + k + "-fx");
-        var hasTimeLines = false;
-        $("." + k + "-fx").each(function (i) {
-            var c = this.className;
-            if (c.indexOf(" " + k + "-accordion") != -1) $exeFX.accordion.init(this, i);
-            else if (c.indexOf(" " + k + "-tabs") != -1) $exeFX.tabs.init(this, i);
-            else if (c.indexOf(" " + k + "-paginated") != -1) $exeFX.paginated.init(this, i);
-            else if (c.indexOf(" " + k + "-carousel") != -1) $exeFX.carousel.init(this, i);
-            else if (c.indexOf(" " + k + "-timeline") != -1 && document.body.className.indexOf("exe-epub3") != 0) {
-                $exeFX.timeline.init(this, i);
-                hasTimeLines = true;
-            }
-        });
-        if (hasTimeLines) {
-            setTimeout(function () { $.timeliner({}); }, 500);
-        }
-    },
-
-    checkIE: function () {
-        var n = navigator.userAgent.toLowerCase();
-        return (n.indexOf('msie') != -1) ? parseInt(n.split('msie')[1]) : false;
-    },
-
-    noFX: function (e) {
-        e.attr("class", "").css("padding", "1em");
-    },
-
-    iframesCheck: function (block) {
-        $("iframe", block).each(function () {
-            if (this.src && typeof (this.src) == "string") {
-                var e = $(this);
-                var c = "exeFXcheckedIframe";
-                if (!e.hasClass(c)) {
-                    e.addClass(c);
-                    this.src = this.src;
-                }
-            }
-        });
-    },
-
-    // ===== Accordion =====
-    accordion: {
-        closeAll: function (parent) {
-            $('.fx-accordion-title', parent).removeClass('active');
-            $('.fx-accordion-content', parent).slideUp(0).removeClass('open');
-            $('.fx-arrow', parent).removeClass('rotated');
-        },
-
-        toggle: function (title) {
-            var parent = title.closest('.fx-accordion-section');
-            var content = title.next('.fx-accordion-content');
-            var arrow = title.find('.fx-arrow');
-
-            if (content.hasClass('open')) {
-                content.slideUp(300).removeClass('open');
-                title.removeClass('active');
-                arrow.removeClass('rotated');
-            } else {
-                $exeFX.accordion.closeAll(title.closest('.exe-fx'));
-                content.slideDown(300).addClass('open');
-                title.addClass('active');
-                arrow.addClass('rotated');
-            }
-        },
-
-        enable: function (e) {
-            $(".fx-accordion-title", e).click(function (ev) {
-                ev.preventDefault();
-                $exeFX.accordion.toggle($(this));
-            });
-        },
-
-        rft: function (e, i) {
-            var html = "";
-            var h = e.html();
-            h = $exeFX.rftTitles(h);
-
-            var p = h.split('<' + $exeFX.h2 + '>');
-            if (p.length == h.split('</' + $exeFX.h2 + '>').length) {
-                for (var x = 1; x < p.length; x++) {
-                    html += '<' + $exeFX.h2 + '>' + p[x];
-                }
-            }
-
-            if ($exeFX.isOldBrowser) {
-                html = html.replace(/<H2>/g, '<h2 class="fx-accordion-title">');
-            } else {
-                html = html.replace(/<h2>/g, '<h2 class="fx-accordion-title">');
-            }
-
-            html = html.replace(/<\/h2>/g, ' <span class="fx-arrow">&#9662;</span></h2><div class="fx-accordion-content"></div>');
-
-            if (html == "") { $exeFX.noFX(e); return; }
-
-            e.html('<div id="' + $exeFX.baseClass + '-accordion-' + i + '" class="exe-fx">\n<div class="fx-accordion-section">\n' + html + '\n</div>\n</div>\n');
-
-            var sections = $(".fx-accordion-section", e);
-            sections.each(function (index) {
-                var titles = $(".fx-accordion-title", this);
-                titles.each(function (y) {
-                    var content = $(this).next(".fx-accordion-content");
-                    var originalContent = $(this).nextAll().not(".fx-accordion-title").detach();
-                    content.append(originalContent);
-                });
-            });
-
-            $exeFX.accordion.enable(e);
-        },
-
-        init: function (x, i) {
-            var e = $(x);
-            var a = $("h2", e);
-            if (a.length > 0) $exeFX.accordion.rft(e, i);
-            else $exeFX.noFX(e);
-        }
-    },
-
-    rftTitles: function (t) {
-        var div = $("<div></div>");
-        div.html(t);
-        $("h2", div).each(function () {
-            var attributes = $.map(this.attributes, function (item) {
-                return item.name;
-            });
-            var title = $(this);
-            $.each(attributes, function (i, item) {
-                if (item.toLowerCase() != "title") title.removeAttr(item);
-            });
-        });
-        t = div.html();
-        return t;
-    }
-};
-
-$(document).ready(function () {
-    $exeFX.init();
-});
+<p><img src="bienvenida_jpg.jpg" alt="" width="800" height="533" style="display: block; margin-left: auto; margin-right: auto;" /></p></div>
+</div>
+</div>
+</article>
+<div id="packageLicense" class="cc cc-by-sa">
+<p><span>Obra publicada con</span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Reconocimiento Compartir igual 4.0</a></p>
+</div>
+</section>
+</div>
+<div id='bottomPagination'>
+<nav class="pagination noprt">
+<a href="mdulo_1__gua_para__empezar_sin_excusas.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+</div>
+<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_intef_js.js"></script></body></html>
