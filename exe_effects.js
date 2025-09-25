@@ -1,5 +1,6 @@
 // Effects Plugin for eXeLearning (CORREGIDO COMPLETO)
-// Por Ignacio Gros / Alfonso Sánchez: ambos desplegables cerrados al inicio, flechas giratorias
+// By Ignacio Gros (http://www.gros.es/) for eXeLearning (http://exelearning.net/)
+// CORRECCIONES por Alfonso Sánchez para restaurar desplegables y normalizar HTML
 // Creative Commons Attribution-ShareAlike (http://creativecommons.org/licenses/by-sa/3.0/)
 
 $exeFX = {
@@ -7,6 +8,7 @@ $exeFX = {
     h2 : "h2",
     isOldBrowser : false,
 
+    // ===== Inicialización principal =====
     init : function(){
         var ie = $exeFX.checkIE();
         if ((!isNaN(parseFloat(ie)) && isFinite(ie)) && ie<9) {
@@ -14,6 +16,7 @@ $exeFX = {
             $exeFX.h2 = "H2";
         }
         var k = $exeFX.baseClass;
+        var f = $("."+k+"-fx");
         var hasTimeLines = false;
         $("."+k+"-fx").each(function(i){
             var c = this.className;
@@ -31,62 +34,132 @@ $exeFX = {
         }
     },
 
+    // ===== Utilidades =====
+    hex2rgb : function(h,a){
+        var hex = parseInt(h.substring(1), 16);
+        var r = (hex & 0xff0000) >> 16;
+        var g = (hex & 0x00ff00) >> 8;
+        var b = hex & 0x0000ff;
+        var c = "rgb";
+        if (a) c += "a";
+        c += "("+r+","+g+","+b+"";
+        if (a) c+= ","+a;
+        c += ")";
+        return c;
+    },
+
+    iframesCheck : function(block){
+        var iframes = $("iframe",block);
+        iframes.each(function(){
+            if (this.src && typeof(this.src)=="string"){
+                var e = $(this);
+                var c = "exeFXcheckedIframe";
+                if (!e.hasClass(c)){
+                    e.addClass(c);
+                    this.src = this.src; // reload once
+                }
+            }
+        });
+    },
+
+    removeXMLNS : function(t) {
+        if (document.body.className.indexOf("exe-epub3")==0) {
+            var xmlnsString = 'h2 xmlns="http://www.w3.org/1999/xhtml"';
+            var xmlnsStringExp = new RegExp(xmlnsString, 'g');
+            t = t.replace(xmlnsStringExp, 'h2');
+        }
+        return t;
+    },
+
+    rftTitles : function(t) {
+        var div = $("<div></div>");
+        div.html(t);
+        $("h2",div).each(function() {
+            var attributes = $.map(this.attributes, function(item) {
+                return item.name;
+            });
+            var title = $(this);
+            $.each(attributes, function(i, item) {
+                if (item.toLowerCase()!="title") title.removeAttr(item);
+            });
+        });
+        t = div.html();
+        t = $exeFX.removeXMLNS(t);
+
+        var s = t.split('<'+$exeFX.h2+' title="');
+        var n ="";
+        if (s.length<2) return t;
+        for (var i=0;i<s.length;i++) {
+          n += s[i];
+          if (i<(s.length-1))n += '<'+$exeFX.h2+'><span title="';
+          n = n.replace("</"+$exeFX.h2+">","</span></"+$exeFX.h2+">");
+        }
+        return n;
+    },
+
+    noFX : function(e) {
+        e.attr("class","").css("padding","1em");
+    },
+
     checkIE : function(){
         var n = navigator.userAgent.toLowerCase();
         return (n.indexOf('msie') != -1) ? parseInt(n.split('msie')[1]) : false;
     },
 
-    rftTitles : function(t) {
-        var div = $("<div></div>").html(t);
-        $("h2",div).each(function() {
-            var title = $(this);
-            $.each(this.attributes, function(i, item) {
-                if (item.name.toLowerCase()!="title") title.removeAttr(item.name);
-            });
-        });
-        t = div.html();
-        return t.replace(/h2 xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g,"h2");
-    },
-
-    noFX : function(e) { e.attr("class","").css("padding","1em"); },
-    iframesCheck : function(block){
-        $("iframe",block).each(function(){
-            var e = $(this);
-            if (this.src && !e.hasClass("exeFXcheckedIframe")){
-                e.addClass("exeFXcheckedIframe");
-                this.src = this.src;
-            }
-        });
-    },
-
+    // ===== Accordion =====
     accordion : {
+        closeBlock : function(aID){
+            var k = $exeFX.baseClass;
+            $('.fx-accordion-title',"#"+aID).removeClass('active');
+            $('.fx-accordion-content',"#"+aID).slideUp(300).removeClass('open');
+        },
         enable : function(e){
             $(".fx-accordion-title",e).click(function(ev){
                 ev.preventDefault();
                 var parent = $(this).parent();
-                var thisContent = $(this).next(".fx-accordion-content");
-                var arrow = $(this).find(".fx-arrow");
-
-                if(thisContent.hasClass("open")){
-                    thisContent.slideUp(300).removeClass("open");
-                    $(this).removeClass("active");
-                    arrow.css("transform","rotate(0deg)");
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                    $('.fx-accordion-content',parent).slideUp(300).removeClass('open');
                 } else {
-                    $(".fx-accordion-content",parent).slideUp(300).removeClass("open");
-                    $(".fx-accordion-title",parent).removeClass("active").find(".fx-arrow").css("transform","rotate(0deg)");
-
-                    thisContent.slideDown(300).addClass("open");
-                    $(this).addClass("active");
-                    arrow.css("transform","rotate(90deg)");
+                    $('.fx-accordion-title',parent).removeClass('active');
+                    $('.fx-accordion-content',parent).slideUp(300).removeClass('open');
+                    $(this).addClass('active');
+                    $(this).next('.fx-accordion-content').slideDown(300).addClass('open');
                 }
             });
         },
         rft : function(e,i){
-            var html = $exeFX.rftTitles(e.html());
-            html = html.replace(/<h2>/g,'<h2 class="fx-accordion-title"><span class="fx-arrow">▶</span> ');
-            html = html.replace(/<\/h2>/g,'</h2><div class="fx-accordion-content" style="display:none;"></div>'); // Cerrado al cargar
+            var html = "";
+            var h = e.html();
+            h = $exeFX.rftTitles(h);
+            var p = h.split('<'+$exeFX.h2+'>');
+            if (p.length==h.split('</'+$exeFX.h2+'>').length) {
+                for (var x=1; x<p.length; x++) {
+                    html += '<'+$exeFX.h2+'>'+p[x];
+                }
+            }
 
-            e.html('<div id="'+$exeFX.baseClass+'-accordion-'+i+'" class="fx-accordion-section">'+html+'</div>');
+            var k = $exeFX.baseClass;
+            if ($exeFX.isOldBrowser) {
+                html = html.replace(/<H2>/g, '<h2 class="fx-accordion-title">');
+                html = html.replace(/<\/H2>/g, '</h2><div class="fx-accordion-content">');
+            } else {
+                html = html.replace(/<h2>/g, '<h2 class="fx-accordion-title">');
+                html = html.replace(/<\/h2>/g, '</h2><div class="fx-accordion-content">');
+            }
+
+            html = html + '</div>'; // cierre único de último div
+
+            if (html=="") { $exeFX.noFX(e); return; }
+
+            e.html('<div id="'+k+'-accordion-'+i+'">\n<div class="fx-accordion-section">\n'+html+'\n</div>\n</div>\n');
+
+            var h2 = $("h2",e);
+            $(".fx-accordion-content",e).each(function(y){
+                var id = k+"-accordion-"+i+"-"+y;
+                this.id = id;
+                h2.eq(y).wrap('<a class="fx-accordion-title fx-accordion-title-'+y+' fx-C1" href="#'+id+'" id="'+id.replace(/-/g,"_")+'-trigger"></a>');
+            });
             $exeFX.accordion.enable(e);
         },
         init : function(x,i){
@@ -97,30 +170,59 @@ $exeFX = {
         }
     },
 
+    // ===== Tabs =====
     tabs : {
         show : function(gID,id){
             var g = $("#"+gID);
-            $(".fx-tabs li",g).removeClass("fx-current fx-C2");
+            $(".fx-tabs li",g).removeClass("fx-current").removeClass("fx-C2");
             $("#"+id+"-link").addClass("fx-current fx-C2");
             $(".fx-tab-content",g).removeClass("fx-current");
-            $("#"+id).addClass("fx-current");
-            $exeFX.iframesCheck($("#"+id));
+            var block = $("#"+id);
+            block.addClass("fx-current");
+            $exeFX.iframesCheck(block);
         },
         rft : function(e,i){
-            var html = $exeFX.rftTitles(e.html());
-            html = html.replace(/<h2/g,'<div class="fx-tab-content fx-C2"><h2 class="sr-av"');
-            html = html.replace(/<\/h2>/g,'</h2></div>');
-            e.attr("id",$exeFX.baseClass+"-tabs-"+i).html(html);
+            var html = "";
+            var k = $exeFX.baseClass;
+            var gID = k+"-tabs-"+i;
+            var h = e.html();
+            h = $exeFX.rftTitles(h);
+            var p = h.split('<'+$exeFX.h2+'>');
+            if (p.length==h.split('</'+$exeFX.h2+'>').length) {
+                for (var x=1; x<p.length; x++) {
+                    html += '<'+$exeFX.h2+'>'+p[x];
+                }
+            }
 
-            var ul = '<ul class="fx-tabs">';
+            if ($exeFX.isOldBrowser) {
+                html = html.replace(/<H2/g, '</div>\n<H2');
+                html = html.replace('</div>\n<H2','<H2');
+                html = html.replace(/<H2/g, '<div class="fx-tab-content fx-C2">\n<H2 class="sr-av"');
+            } else {
+                html = html.replace(/<h2/g, '</div>\n<h2');
+                html = html.replace('</div>\n<h2','<h2');
+                html = html.replace(/<h2/g, '<div class="fx-tab-content fx-C2">\n<h2 class="sr-av"');
+            }
+
+            if (html=="") { $exeFX.noFX(e); return; }
+
+            html = html + '</div>';
+            e.attr("id",gID).html(html);
+
+            var ul = '<ul class="fx-tabs">\n';
             $(".fx-tab-content",e).each(function(y){
-                var h2 = $("h2",this).eq(0);
-                var t = h2.text() || (y+1);
-                var id = $exeFX.baseClass+"-tab-"+i+"-"+y;
-                $(this).attr("id",id);
-                var c = (y==0)?' class="fx-current fx-C2"':'';
-                if(y==0) $(this).addClass("fx-current");
-                ul += '<li'+c+' id="'+id+'-link"><a href="#'+id+'" class="exeFXTabLink'+i+'">'+t+'</a></li>';
+                var h2 = $("H2",this).eq(0);
+                var t = y+1;
+                if (h2.length>0) t = h2.text();
+                var hT = $("SPAN",h2);
+                if (hT.length==1){
+                    hT = hT.eq(0).attr("title");
+                    if(hT){ t=hT; h2.removeClass("sr-av");}
+                }
+                var id = k+"-tab-"+i+"-"+y;
+                var c = "";
+                if (y==0){ c=' class="fx-current fx-C2"'; this.className += " fx-current fx-default-panel"; }
+                ul += '<li'+c+' id="'+id+'-link"><a href="#'+id+'" class="exeFXTabLink'+gID+'">'+t+'</a></li>';
             });
             ul += '</ul>';
             e.prepend(ul);
@@ -128,10 +230,10 @@ $exeFX = {
             $(".fx-tabs a",e).click(function(ev){
                 ev.preventDefault();
                 var target = $(this).attr("href").substring(1);
-                $exeFX.tabs.show(e.attr("id"),target);
+                $exeFX.tabs.show(gID,target);
             });
         },
-        init : function(e,i){ $exeFX.tabs.rft($(e),i); }
+        init : function(e,i){ $exeFX.tabs.rft(e,i); }
     },
 
     paginated : { init:function(){} },
