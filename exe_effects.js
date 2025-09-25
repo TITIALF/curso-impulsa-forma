@@ -1,6 +1,5 @@
 // Effects Plugin for eXeLearning (CORREGIDO COMPLETO)
-// By Ignacio Gros (http://www.gros.es/) for eXeLearning (http://exelearning.net/)
-// CORRECCIONES por Alfonso Sánchez: desplegables dobles, flechas giratorias, cerrados al cargar
+// Por Ignacio Gros / Alfonso Sánchez: ambos desplegables cerrados al inicio, flechas giratorias
 // Creative Commons Attribution-ShareAlike (http://creativecommons.org/licenses/by-sa/3.0/)
 
 $exeFX = {
@@ -8,7 +7,6 @@ $exeFX = {
     h2 : "h2",
     isOldBrowser : false,
 
-    // ===== Inicialización principal =====
     init : function(){
         var ie = $exeFX.checkIE();
         if ((!isNaN(parseFloat(ie)) && isFinite(ie)) && ie<9) {
@@ -33,35 +31,9 @@ $exeFX = {
         }
     },
 
-    // ===== Utilidades =====
-    hex2rgb : function(h,a){
-        var hex = parseInt(h.substring(1), 16);
-        var r = (hex & 0xff0000) >> 16;
-        var g = (hex & 0x00ff00) >> 8;
-        var b = hex & 0x0000ff;
-        var c = "rgb";
-        if (a) c += "a";
-        c += "("+r+","+g+","+b+"";
-        if (a) c+= ","+a;
-        c += ")";
-        return c;
-    },
-
-    iframesCheck : function(block){
-        $("iframe",block).each(function(){
-            var e = $(this);
-            if (this.src && !e.hasClass("exeFXcheckedIframe")){
-                e.addClass("exeFXcheckedIframe");
-                this.src = this.src;
-            }
-        });
-    },
-
-    removeXMLNS : function(t) {
-        if (document.body.className.indexOf("exe-epub3")==0) {
-            t = t.replace(/h2 xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g,"h2");
-        }
-        return t;
+    checkIE : function(){
+        var n = navigator.userAgent.toLowerCase();
+        return (n.indexOf('msie') != -1) ? parseInt(n.split('msie')[1]) : false;
     },
 
     rftTitles : function(t) {
@@ -73,29 +45,20 @@ $exeFX = {
             });
         });
         t = div.html();
-        t = $exeFX.removeXMLNS(t);
-
-        var s = t.split('<'+$exeFX.h2+' title="');
-        var n ="";
-        if (s.length<2) return t;
-        for (var i=0;i<s.length;i++) {
-          n += s[i];
-          if (i<(s.length-1))n += '<'+$exeFX.h2+'><span title="';
-          n = n.replace("</"+$exeFX.h2+">","</span></"+$exeFX.h2+">");
-        }
-        return n;
+        return t.replace(/h2 xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g,"h2");
     },
 
-    noFX : function(e) {
-        e.attr("class","").css("padding","1em");
+    noFX : function(e) { e.attr("class","").css("padding","1em"); },
+    iframesCheck : function(block){
+        $("iframe",block).each(function(){
+            var e = $(this);
+            if (this.src && !e.hasClass("exeFXcheckedIframe")){
+                e.addClass("exeFXcheckedIframe");
+                this.src = this.src;
+            }
+        });
     },
 
-    checkIE : function(){
-        var n = navigator.userAgent.toLowerCase();
-        return (n.indexOf('msie') != -1) ? parseInt(n.split('msie')[1]) : false;
-    },
-
-    // ===== Accordion =====
     accordion : {
         enable : function(e){
             $(".fx-accordion-title",e).click(function(ev){
@@ -109,7 +72,6 @@ $exeFX = {
                     $(this).removeClass("active");
                     arrow.css("transform","rotate(0deg)");
                 } else {
-                    // Cierra todos los demás
                     $(".fx-accordion-content",parent).slideUp(300).removeClass("open");
                     $(".fx-accordion-title",parent).removeClass("active").find(".fx-arrow").css("transform","rotate(0deg)");
 
@@ -122,11 +84,9 @@ $exeFX = {
         rft : function(e,i){
             var html = $exeFX.rftTitles(e.html());
             html = html.replace(/<h2>/g,'<h2 class="fx-accordion-title"><span class="fx-arrow">▶</span> ');
-            html = html.replace(/<\/h2>/g,'</h2><div class="fx-accordion-content"></div>');
+            html = html.replace(/<\/h2>/g,'</h2><div class="fx-accordion-content" style="display:none;"></div>'); // Cerrado al cargar
 
             e.html('<div id="'+$exeFX.baseClass+'-accordion-'+i+'" class="fx-accordion-section">'+html+'</div>');
-
-            $(".fx-accordion-content",e).hide(); // Cerrado al cargar
             $exeFX.accordion.enable(e);
         },
         init : function(x,i){
@@ -137,7 +97,6 @@ $exeFX = {
         }
     },
 
-    // ===== Tabs =====
     tabs : {
         show : function(gID,id){
             var g = $("#"+gID);
@@ -172,18 +131,12 @@ $exeFX = {
                 $exeFX.tabs.show(e.attr("id"),target);
             });
         },
-        init : function(e,i){
-            $exeFX.tabs.rft($(e),i);
-        }
+        init : function(e,i){ $exeFX.tabs.rft($(e),i); }
     },
 
-    // ===== Placeholder para otras funcionalidades =====
     paginated : { init:function(){} },
     carousel : { init:function(){} },
     timeline : { init:function(){} }
 };
 
-// Inicializa cuando el documento esté listo
-$(document).ready(function(){
-    $exeFX.init();
-});
+$(document).ready(function(){ $exeFX.init(); });
