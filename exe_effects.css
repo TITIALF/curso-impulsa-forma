@@ -1,35 +1,68 @@
-/* Accordion */
+/* =================================================================================================
+ * ACCORDION (DESPLEGABLES) - DISEÑO PROFESIONAL FINAL
+ * ================================================================================================= */
 .exe-accordion,.exe-accordion *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 .exe-accordion{width:90%;margin:2em 0 2em 5%}
 .js .exe-accordion{overflow:hidden;box-shadow:0px 1px 3px rgba(0,0,0,0.25);border-radius:3px;background:#fff;width:96%;margin-left:2%}
-.fx-accordion-title, .exe-accordion h2 {
-    width: 100%;
-    padding: 15px;
-    display: inline-block;
-    background: #f0f0f0;
-    transition: all linear 0.15s;
-    color: #333;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    position: relative;
-    padding-right: 35px;
+/* Contenedor de cada título/sección del desplegable */
+.exe-accordion .fx-accordion-section {
+	border: 0;
 }
-.fx-accordion-title{border-top:1px solid #fff}
-.fx-accordion-title-0{border:none}
-#main .exe-accordion h2{border-radius:3px;margin:0;font-size:1em}
-.js .exe-accordion h2{padding:0;border:0;display:block;background:none;border-radius:3px}
-.js .fx-accordion-title{text-decoration:none}
-.fx-accordion-title.active, .fx-accordion-title:hover{
-    background: #ccc;
-    filter:alpha(opacity=90);
-    opacity:.9;
-    text-decoration:none
+.exe-accordion .fx-accordion-section a.fx-accordion-title {
+	/* DISEÑO BASE */
+	display: block;
+	padding: 10px 15px;
+	margin: 0;
+	background-color: #dddddd; /* GRIS FUERTE */
+	color: #111 !important; /* LETRAS NEGRAS */
+	font-weight: bold; 
+	border-bottom: 1px solid #c0c0c0;
+	text-decoration: none;
+	position: relative;
+	cursor: pointer;
 }
-.fx-accordion-section:last-child .fx-accordion-title{border-bottom:none}
-.fx-accordion-content{padding:0 15px;display:none}
-
-
-
+/* Efecto Hover */
+.exe-accordion .fx-accordion-section a.fx-accordion-title:hover {
+	background-color: #c4c4c4;
+	transition: background-color 0.2s;
+}
+/* Título <h2> dentro del enlace (Ajustes de Fuente y Negrilla) */
+.exe-accordion .fx-accordion-section a.fx-accordion-title h2 {
+	margin: 0;
+	padding: 0;
+	font-size: 1.2em; /* FUENTE MÁS GRANDE */
+	color: inherit;
+	font-weight: 700; /* Asegura la negrilla */
+}
+/* El contenido que se oculta */
+.exe-accordion .fx-accordion-content {
+	padding: 1em;
+	background-color: #fff;
+	display: none;
+}
+/* Flecha que indica desplegable (Ajuste de Posición) */
+.exe-accordion .fx-accordion-title::after {
+	content: '\25BC'; /* Flecha hacia abajo (cerrado) */
+	position: absolute;
+	right: 4px !important; /* FUERZA la posición para que ignore otros estilos */
+	top: 50%;
+	transform: translateY(-50%);
+	transition: transform 0.3s ease;
+	font-size: 0.8em;
+	color: #444;
+}
+/* Flecha Activa: cuando el desplegable está abierto */
+.exe-accordion .fx-accordion-title.active::after {
+	content: '\25B2'; /* Flecha hacia arriba (abierto) */
+}
+/* Asegura que el último item no tenga borde inferior */
+.exe-accordion .fx-accordion-section:last-child a.fx-accordion-title {
+	border-bottom: 0;
+}
+.exe-accordion .fx-accordion-section:last-child a.fx-accordion-title.active {
+	border-bottom: 0;
+}
+/* Tabs */
 .exe-tabs{margin:2em auto;width:90%}
 .js .exe-tabs{width:96%}
 .exe-tabs .fx-tabs{margin:0;padding:0;list-style:none;overflow:auto}
@@ -137,25 +170,4 @@ color:#FFF;
 .emphasis1 .exe-fx .fx-C2 a,
 .emphasis1 .fx-pagination a{
 background:#FFF;
-}
-/* Flecha acordeón: giro y posición base */
-.exe-accordion h2 {
-  position: relative;
-  padding-right: 25px; /* espacio para la flecha */
-  cursor: pointer;
-}
-
-.exe-accordion h2::after {
-  content: "▼";
-  position: absolute;
-  right: 10px; /* posición base */
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.3s ease;
-}
-
-/* Gira cuando tiene la clase activa o expanded */
-.exe-accordion h2.active::after,
-.exe-accordion h2.expanded::after {
-  transform: translateY(-50%) rotate(180deg);
 }
